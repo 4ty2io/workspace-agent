@@ -38,13 +38,17 @@ Since `.agent` and `.context` are real files in your workspace, you can modify t
 To update the agent to the latest version, simply repeat the "Fetch and Install" process.
 
 1.  Clone the latest version to a temp dir.
+### 6. Updating
+To update the agent to the latest version, simply repeat the "Fetch and Install" process.
+
+1.  Clone the latest version to a temp dir.
 2.  Run `install.sh`.
     - It will **SKIP** any files you have modified or that already exist.
-    - It will **UPDATE** only if you strictly follow the "manual delete" process.
-3.  To force an update of a specific skill (e.g., `debate`):
-    - `rm -rf .agent/skills/debate`
-    - Run the installer.
-    - The new version will be copied into place.
+    - If you want to **OVERWRITE** your local changes with the latest version, run:
+      ```bash
+      ./install.sh --force
+      ```
+    - ⚠️ **WARNING**: `--force` will delete your `.agent` and `.context` directories and replace them with fresh copies.
 
 ### 5. Start Coding
 You are now ready to work with your agentic workspace!
