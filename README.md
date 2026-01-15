@@ -30,7 +30,8 @@ Run the installation script to set up the necessary symlinks and template files.
 This will:
 - Symlink `.agent` from `workspace-agent/.agent` to your root.
 - Symlink `.context` from `workspace-agent/.context` to your root.
-- Copy `workspace-agent/template/mission.md` to your root (if it doesn't exist).
+- Copy all files from `workspace-agent/template/` to your root (recursively, without overwriting).
+- Initialize your `.gitignore` with agent defaults (or append to it if it exists).
 
 ### 5. Start Coding
 You are now ready to work with your agentic workspace!

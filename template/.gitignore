@@ -1,0 +1,18 @@
+# Virtual Environments
+venv/
+env/
+ENV/
+.env
+.venv
+env.bak/
+venv.bak/
+
+# Antigravity / IDE
+.idea/
+.vscode/
+*.swp
+
+# Workspace Agent Symlinks
+# These are symlinked from the workspace-agent submodule so we ignore the local paths
+.agent
+.context
