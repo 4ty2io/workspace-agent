@@ -10,17 +10,37 @@ echo "Installing workspace-agent..."
 echo "  Agent Directory: $AGENT_DIR"
 echo "  Workspace Root:  $WORKSPACE_ROOT"
 
+# Parse arguments
+FORCE_INSTALL=false
+for arg in "$@"; do
+  case $arg in
+    --force)
+      FORCE_INSTALL=true
+      shift
+      ;;
+  esac
+done
+
+if [ "$FORCE_INSTALL" = true ]; then
+    echo "⚠️  FORCE MODE ENABLED: Existing files will be overwritten!"
+fi
+
 # Helper function to copy files/directories
 install_or_update() {
   local source="$1"
   local target="$2"
   local name="$3"
   
-  if [ -e "$target" ]; then
+  if [ -e "$target" ] && [ "$FORCE_INSTALL" = false ]; then
       echo "  [SKIP] $name already exists at $target."
-      echo "         To update, manually delete it or copy specific files."
+      echo "         To update, manually delete it or use --force."
   else
-      echo "  [COPY] Installing $name..."
+      if [ -e "$target" ]; then
+          echo "  [UPDATE] Overwriting $name..."
+          rm -rf "$target"
+      else
+          echo "  [COPY] Installing $name..."
+      fi
       cp -r "$source" "$target"
       echo "         -> Installed to $target"
   fi
@@ -43,9 +63,14 @@ TEMPLATE_DIR="$AGENT_DIR/template"
 
 if [ -d "$TEMPLATE_DIR" ]; then
     echo "Copying template files from $TEMPLATE_DIR to $WORKSPACE_ROOT..."
-    # cp -r -n does not overwrite existing files
-    cp -r -n "$TEMPLATE_DIR/"* "$WORKSPACE_ROOT/" || true
-    echo "  [OK] Template files copied."
+    if [ "$FORCE_INSTALL" = true ]; then
+        cp -r "$TEMPLATE_DIR/"* "$WORKSPACE_ROOT/"
+        echo "  [UPDATE] Template files overwritten."
+    else
+        # cp -r -n does not overwrite existing files
+        cp -r -n "$TEMPLATE_DIR/"* "$WORKSPACE_ROOT/" || true
+        echo "  [OK] Template files copied (no overwrite)."
+    fi
 else
     echo "  [WARN] Template directory not found at $TEMPLATE_DIR"
 fi
