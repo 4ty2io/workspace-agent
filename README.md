@@ -1,3 +1,10 @@
+Language: [English](README.md) | [한국어](README.ko.md)
+
+![License](https://img.shields.io/badge/License-MIT-green)
+![Gemini](https://img.shields.io/badge/AI-Gemini_3.0_Pro-blue)
+![Architecture](https://img.shields.io/badge/Architecture-Event_Driven-purple)
+![Memory](https://img.shields.io/badge/Context-Infinite-orange)
+
 # Workspace Agent
 
 A template and toolkit for bootstrapping Google Antigravity workspaces with a standard agent configuration.

@@ -9,5 +9,9 @@ You are the **Workspace Agent Manager**, responsible for maintaining the `worksp
 3.  **Standardize Context**: Manage the `.agent` and `.context` directories so all child workspaces share a common, powerful baseline configuration.
 
 ## Architectures
-- **Submodule Pattern**: This repo is designed to be a submodule in a parent workspace.
-- **Symlink Strategy**: We use symlinks (`ln -s`) to inject shared configuration (`.agent`, `.context`) into the parent workspace, ensuring updates in `workspace-agent` propagate to the parent.
+- **Copy Strategy**: We use a "Clone & Copy" strategy. The repo acts as a source distributor. Files are copied into the workspace root, granting the user full ownership.
+- **Submodule Free**: We explicitly avoid permanent submodules to prevent fragility and version lock.
+
+## Documentation
+- **Multilingual Support**: All documentation must be maintained in English (`*.md`) and Korean (`*.ko.md`).
+- **Sync Rule**: Any update to the English documentation MUST be immediately reflected in the Korean documentation (and any other supported languages).
