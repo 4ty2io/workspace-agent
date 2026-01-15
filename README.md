@@ -9,29 +9,50 @@ This project is designed to be added as a submodule to your main workspace.
 ### 1. Initialize a new Workspace
 Create a folder for your new project (e.g., `my-new-project`) and `cd` into it.
 
-### 2. Add as Submodule
-```bash
-git init
-git submodule add https://github.com/4ty2io/workspace-agent.git workspace-agent
-```
-
-### 3. Sync and Update
-```bash
-git submodule update --init --recursive
-```
-
-### 4. Install
-Run the installation script to set up the necessary symlinks and template files.
+### 2. Fetch and Install
+Since you will "own" the agent configuration, you don't need a permanent submodule. Just clone the repo temporarily and run the installer.
 
 ```bash
-./workspace-agent/install.sh
+# 1. Clone to a temporary directory
+git clone --depth 1 https://github.com/4ty2io/workspace-agent.git .workspace-agent-temp
+
+# 2. Run the installer
+./.workspace-agent-temp/install.sh
+
+# 3. Cleanup
+rm -rf .workspace-agent-temp
 ```
 
-This will:
-- Symlink `.agent` from `workspace-agent/.agent` to your root.
-- Symlink `.context` from `workspace-agent/.context` to your root.
-- Copy all files from `workspace-agent/template/` to your root (recursively, without overwriting).
-- Initialize your `.gitignore` with agent defaults (or append to it if it exists).
+### 3. Verify
+You should now see `.agent/` and `.context/` in your project root.
+```bash
+ls -la .agent .context
+```
+
+**What this does:**
+- **COPIES** `.agent/` and `.context/` from `workspace-agent/` to your root.
+- **COPIES** template files (initially) to your root.
+- Configures `.gitignore`.
+
+> [!IMPORTANT]
+> You now "own" the configuration files in your workspace root.
+
+### 5. Customization
+Since `.agent` and `.context` are real files in your workspace, you can modify them freely!
+- Want to change the `code-review` skill? Edit `.agent/skills/code-review/SKILL.md`.
+- Want to add a custom workflow? Add it to `.agent/workflows/`.
+
+### 6. Updating
+To update the agent to the latest version, simply repeat the "Fetch and Install" process.
+
+1.  Clone the latest version to a temp dir.
+2.  Run `install.sh`.
+    - It will **SKIP** any files you have modified or that already exist.
+    - It will **UPDATE** only if you strictly follow the "manual delete" process.
+3.  To force an update of a specific skill (e.g., `debate`):
+    - `rm -rf .agent/skills/debate`
+    - Run the installer.
+    - The new version will be copied into place.
 
 ### 5. Start Coding
 You are now ready to work with your agentic workspace!
