@@ -1,0 +1,13 @@
+# Virtual Environments
+venv/
+env/
+ENV/
+.env
+.venv
+env.bak/
+venv.bak/
+
+# Antigravity / IDE
+.idea/
+.vscode/
+*.swp
