@@ -1,37 +1,55 @@
 ---
 name: debate
-description: Expert Debate Protocol for complex problem solving with mandatory conflict phases.
+description: Expert Debate Protocol aimed at reaching the absolute theoretical optimum through forced infinite iteration.
 ---
 
-# Debate Skill
+# Debate Skill: Deep Iteration Mode
 
-This skill triggers a multi-persona debate. **Crucially, it enforces a "Conflict First" protocol where early consensus is strictly forbidden.**
+This skill triggers a relentless, multi-persona debate.
+**CORE PHILOSOPHY:** "Good enough" is failure. We strive for the theoretical limit.
+**KEY RULE:** Early consensus or abandonment of the problem is **STRICTLY FORBIDDEN**.
 
 - **Trigger:** When the user types "Start Debate" or applies the skill to a complex problem.
 
 - **Process:**
-  0.  **Language Constraint:**
-      - All Personas MUST write their arguments and responses in the **User's Language** (the language the user used to trigger the debate).
-      - If the user uses Korean, the Debate MUST be in Korean.
+  0.  **Constraints:**
+      - Language: All Personas MUST write in the **User's Language** (the language the user used to trigger the debate).
+      - Task Group: Utilize the `task_boundary` tool to manage the debate iteration.
 
-  1.  **Task Group:** Utilize the `task_boundary` tool to manage the debate iteration.
+  1.  **The Personas:**
+      - **Expert A (The Perfectionist):** Never satisfied. Even if an idea is 99% good, focuses on the missing 1%.
+      - **Expert B (The Pragmatist):** Demands implementation details. *Constraint: If a solution is rejected, MUST propose a practical alternative immediately.*
+      - **Expert C (The Radical Innovator):** Prevents stagnation. *Constraint: Whenever the debate slows down or leans towards "impossible", MUST introduce a paradigm shift or a crazy new angle.*
+      - **Expert D (The Devil's Advocate):** Attacks the underlying assumptions. *Constraint: Cannot accept "it's too hard" as an excuse.*
+      - **Expert E (The Optimizer):** Focuses solely on efficiency/cost/speed.
+      - **Moderator (The Judge):**
+        - Controls the flow.
+        - **AUTHORITY:** Rejects any conclusion that feels rushed.
+        - **DUTY:** If the team tries to abandon an idea, the Moderator forces them to "Pivot" instead of "Quit".
 
-  2.  **The Personas:**
-      - **Expert A (The Skeptic):** Critically analyzes risks. *Constraint: Must identify at least one fatal flaw in every proposal.*
-      - **Expert B (The Realist):** Focuses on implementation. *Constraint: Must reject any solution that increases complexity by >10%.*
-      - **Expert C (The Innovator):** Proposes novel approaches. *Constraint: Must critique "standard" solutions as obsolete.*
-      - **Expert D (The Adversarial):** *Directly attacks the logic of the previous speaker. Cannot propose solutions, only destroy arguments.*
-      - **Expert E (The Saboteur):** *Ignores utility; focuses solely on breaking the system (security/stability).*
+  2.  **The Protocol (The Infinite Loop):**
+      - **Phase 1: Explosion (Round 1):** Generate at least 3 distinct, conflicting approaches.
+      - **Phase 2: The Crucible (Iterative Cycles):**
+        * **Rule:** You cannot simply vote "No". Every critique MUST be accompanied by a "Patch" (fix) or a "Pivot" (direction change).
+        * **The Forbidden Move:** You are FORBIDDEN from concluding "This is impossible" or "We should stop". If a path is blocked, find a way around it.
+        * **Cycle Structure:**
+            1.  Attack the current best idea.
+            2.  Defend and Modify (Do not just defend; change the idea to survive the attack).
+            3.  Check for Local Optima (Are we stuck? If yes, Expert C triggers a random mutation).
+            4.  If data is needed -> Stop the debate -> gather the data -> Debate continues.
 
-  3.  **The Protocol (Strict phases):**
-      - **Phase 1: Divergence (Round 1):** Each Expert proposes a view. **AGREEMENT IS FORBIDDEN.** Experts must highlight why others are wrong.
-      - **Phase 2: The Kill Zone (Rounds 2-3):** Experts must try to "kill" the leading idea. If an idea survives 3 direct critiques without a patch, it advances.
-      - **Phase 3: Convergence:** Only now may Experts begin to merge solutions.
+      - **Phase 3: Saturation Check (The Gatekeeper):**
+        * The Moderator evaluates the solution on a scale of 0-100.
+        * **Threshold:** The debate continues **INDEFINITELY** until the score is **> 98**.
+        * If Score < 98: The Moderator highlights the weakest point and forces a new round (Go back to Phase 2).
+        * If the debate becomes repetitive: The Moderator commands Expert C to "Break the Frame" (change the fundamental constraints).
 
-  4.  **Consensus Check:**
-      - The debate continues until **Expert A (Skeptic)** and **Expert E (Saboteur)** explicitly state "No further objections."
-      - If they still have objections, the loop returns to Phase 2.
+  3.  **Consensus Trap Prevention:**
+      - If Experts A and B agree too quickly (within 2 rounds), Expert D is programmed to immediately sabotage the agreement with a "Black Swan" scenario (extreme worst-case event).
 
-  5.  **Final Output:**
-      - ONLY output the **Final Conclusion** or the **Final Code**.
-      - Do not output the full transcript unless requested.
+  4.  **Output Format:**
+      - **Display the Debate:** (Optional: only if user asks for logs)
+      - **Final Output:**
+        1.  **Current Best Solution:** (Detailed technical spec)
+        2.  **Why it's not perfect yet:** (If any, remaining flaws)
+      - *Note: Only output a "Final Conclusion" when the Moderator declares "Saturation Reached (Score 99/100)". Otherwise, keep iterating or ask the user for a "Continue" signal ONLY every 10 rounds.*
