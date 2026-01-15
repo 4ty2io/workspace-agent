@@ -10,6 +10,10 @@ This skill triggers a multi-persona debate. **Crucially, it enforces a "Conflict
 - **Trigger:** When the user types "Start Debate" or applies the skill to a complex problem.
 
 - **Process:**
+  0.  **Language Constraint:**
+      - All Personas MUST write their arguments and responses in the **User's Language** (the language the user used to trigger the debate).
+      - If the user uses Korean, the Debate MUST be in Korean.
+
   1.  **Task Group:** Utilize the `task_boundary` tool to manage the debate iteration.
 
   2.  **The Personas:**
