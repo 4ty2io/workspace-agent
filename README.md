@@ -12,7 +12,7 @@ Create a folder for your new project (e.g., `my-new-project`) and `cd` into it.
 ### 2. Add as Submodule
 ```bash
 git init
-git submodule add https://github.com/your-org/workspace-agent.git workspace-agent
+git submodule add https://github.com/4ty2io/workspace-agent.git workspace-agent
 ```
 
 ### 3. Sync and Update
