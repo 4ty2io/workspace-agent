@@ -9,18 +9,10 @@ This project is designed to be added as a submodule to your main workspace.
 ### 1. Initialize a new Workspace
 Create a folder for your new project (e.g., `my-new-project`) and `cd` into it.
 
-### 2. Fetch and Install
-Since you will "own" the agent configuration, you don't need a permanent submodule. Just clone the repo temporarily and run the installer.
-
+### 2. Quick Install
+Run this one-liner in your project root to hydrate your workspace:
 ```bash
-# 1. Clone to a temporary directory
-git clone --depth 1 https://github.com/4ty2io/workspace-agent.git .workspace-agent-temp
-
-# 2. Run the installer
-./.workspace-agent-temp/install.sh
-
-# 3. Cleanup
-rm -rf .workspace-agent-temp
+git clone --depth 1 https://github.com/4ty2io/workspace-agent.git .temp-agent && ./.temp-agent/install.sh && rm -rf .temp-agent
 ```
 
 ### 3. Verify
