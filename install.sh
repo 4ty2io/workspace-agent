@@ -86,7 +86,8 @@ if [ -f "$GITIGNORE_SRC" ]; then
         echo "  [OK] Created .gitignore"
     else
         echo "Updating .gitignore with agent defaults..."
-        if ! grep -q "Workspace Agent Symlinks" "$GITIGNORE_DEST"; then
+        # Check if artifacts/ is already ignored
+        if ! grep -q "^artifacts/" "$GITIGNORE_DEST"; then
             echo "" >> "$GITIGNORE_DEST"
             cat "$GITIGNORE_SRC" >> "$GITIGNORE_DEST"
             echo "  [OK] Appended agent ignores to .gitignore"
