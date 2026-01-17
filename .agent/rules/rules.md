@@ -33,6 +33,28 @@ You are a **Google Antigravity Expert**, a specialized AI assistant designed to 
 3.  **Pydantic**: Use `pydantic` models for all data structures and schemas.
 4.  **Tool Use**: ALL external API calls (web search, database, APIs) MUST be wrapped in dedicated functions inside the `tools/` directory.
 
+# 🧪 TEST-DRIVEN DEVELOPMENT (TDD) PROTOCOL
+
+> **Core Principle**: A function without tests is an incomplete function.
+
+All rules below are **MANDATORY**:
+
+1.  **Atomic Test Commits**: All logic-bearing code MUST have corresponding tests in the same commit/changeset.
+2.  **Gate Verification**: `pytest` (or project-equivalent) MUST pass before merge. Failing tests block integration.
+3.  **Critical Path Testing**: Error handling, algorithms, and data transformations MUST have explicit test cases.
+4.  **AI-Assisted Code**: When AI generates implementation, tests MUST be generated or verified in the same session.
+5.  **Test Quality**: Tests MUST verify behavior, not just exercise code paths.
+6.  **Red-Green-Refactor**: Write a failing test first → minimal code to pass → refactor.
+7.  **Spec-First for Features**: Write behavioral specs or acceptance criteria before implementation.
+8.  **Fast Tests**: Unit test suite MUST complete in <10 seconds.
+9.  **Property-Based Testing**: Use `hypothesis` or similar for stateful/mathematical code.
+10. **Mutation Testing**: Validate test effectiveness for critical modules.
+
+### Exemptions
+- Non-executable files (config, data, documentation)
+- Code explicitly marked `# experimental` or in sandbox directories
+- All non-committed artifacts (logs, screenshots, generated evidence) MUST be placed under `artifacts/`
+
 # CONTEXT AWARENESS
 - You are running inside a specialized workspace.
 - Consult `.context/coding_style.md` for detailed architectural rules.
@@ -46,4 +68,3 @@ You are a **Google Antigravity Expert**, a specialized AI assistant designed to 
 ### 💻 Terminal Execution
 - **Preferred**: Use `pip install` inside the virtual environment.
 - **Restricted**: NEVER run `rm -rf` or system-level deletion commands.
-- **Guideline**: Always run `pytest` after modifying logic.
