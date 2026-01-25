@@ -63,14 +63,29 @@ TEMPLATE_DIR="$AGENT_DIR/template"
 
 if [ -d "$TEMPLATE_DIR" ]; then
     echo "Copying template files from $TEMPLATE_DIR to $WORKSPACE_ROOT..."
-    if [ "$FORCE_INSTALL" = true ]; then
-        cp -r "$TEMPLATE_DIR/"* "$WORKSPACE_ROOT/"
-        echo "  [UPDATE] Template files overwritten."
-    else
-        # cp -r -n does not overwrite existing files
-        cp -r -n "$TEMPLATE_DIR/"* "$WORKSPACE_ROOT/" || true
-        echo "  [OK] Template files copied (no overwrite)."
-    fi
+    for item in "$TEMPLATE_DIR"/*; do
+        [ -e "$item" ] || continue
+        name=$(basename "$item")
+        target="$WORKSPACE_ROOT/$name"
+        
+        # Special handling for mission.md: Never overwrite if it exists
+        if [ "$name" == "mission.md" ] && [ -e "$target" ]; then
+            echo "  [SKIP] mission.md already exists at $target. Preserving existing version."
+            continue
+        fi
+        
+        if [ -e "$target" ] && [ "$FORCE_INSTALL" = false ]; then
+            echo "  [SKIP] $name already exists at $target."
+        else
+            if [ -e "$target" ]; then
+                echo "  [UPDATE] Overwriting $name..."
+                rm -rf "$target"
+            else
+                echo "  [COPY] Installing $name..."
+            fi
+            cp -r "$item" "$target"
+        fi
+    done
 else
     echo "  [WARN] Template directory not found at $TEMPLATE_DIR"
 fi
