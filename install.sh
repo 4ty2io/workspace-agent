@@ -49,16 +49,35 @@ install_or_update() {
 # 1. Install .agent (Copy)
 install_or_update "$AGENT_DIR/.agent" "$WORKSPACE_ROOT/.agent" ".agent directory"
 
-# 2. Install .context (Copy)
+# 2. Create .claude symlink to .agent (for Claude Code compatibility)
+CLAUDE_LINK="$WORKSPACE_ROOT/.claude"
+if [ -L "$CLAUDE_LINK" ]; then
+    echo "  [OK] .claude symlink already exists."
+elif [ -e "$CLAUDE_LINK" ]; then
+    if [ "$FORCE_INSTALL" = true ]; then
+        echo "  [UPDATE] Replacing .claude with symlink to .agent..."
+        rm -rf "$CLAUDE_LINK"
+        ln -s .agent "$CLAUDE_LINK"
+        echo "         -> Created .claude -> .agent symlink"
+    else
+        echo "  [SKIP] .claude exists but is not a symlink. Use --force to replace."
+    fi
+else
+    echo "  [LINK] Creating .claude -> .agent symlink..."
+    ln -s .agent "$CLAUDE_LINK"
+    echo "         -> Created .claude -> .agent symlink"
+fi
+
+# 3. Install .context (Copy)
 install_or_update "$AGENT_DIR/.context" "$WORKSPACE_ROOT/.context" ".context directory"
 
-# 3. Create standard directories if missing
+# 4. Create standard directories if missing
 echo "Ensuring standard directories exist..."
 mkdir -p "$WORKSPACE_ROOT/src"
 mkdir -p "$WORKSPACE_ROOT/artifacts/logs"
 echo "  [OK] Standard directories checked/created."
 
-# 4. Copy all files from template/ to workspace root
+# 5. Copy all files from template/ to workspace root
 TEMPLATE_DIR="$AGENT_DIR/template"
 
 if [ -d "$TEMPLATE_DIR" ]; then
@@ -90,7 +109,7 @@ else
     echo "  [WARN] Template directory not found at $TEMPLATE_DIR"
 fi
 
-# 5. Handle .gitignore
+# 6. Handle .gitignore
 GITIGNORE_SRC="$AGENT_DIR/template/.gitignore"
 GITIGNORE_DEST="$WORKSPACE_ROOT/.gitignore"
 
