@@ -22,10 +22,7 @@ A relentless, multi-persona debate protocol that forces solutions toward the the
 - Any problem requiring exhaustive exploration
 
 # Visual Enhancement
-
-- Debate dialogue happens in the **reasoning/thinking block**, not in output
 - Each round is numbered explicitly (Round 1, Round 2, ...)
-- Display logs only if user requests them
 
 # Workflow
 
@@ -57,7 +54,7 @@ Generate at least 3 distinct, conflicting approaches.
 2. Defend and Modify (change the idea to survive the attack)
 3. **Prove It:** Back claims with code, math, benchmark, or test. Speculation is not defense.
 4. Check for Local Optima (stuck? Expert C triggers random mutation)
-5. If data/proof needed → Stop → Gather evidence → Resume after verification
+5. If data/proof needed → Moderator stops debate → Gather evidence/conduct experiment for proof → Moderator resumes debate after verification
 6. **Proof Gate:** Moderator reviews claims. Unproven = UNVERIFIED. VERIFIED = proof presented + no expert refutes. Unverified claims must be proven or discarded.
 7. **Saturation Check:**
 
@@ -105,7 +102,6 @@ Generate at least 3 distinct, conflicting approaches.
 
 # Tips
 
-- The debate happens in your thinking block — only output the final result
 - Track round numbers for auditability
 - When stuck, Expert C's "random mutation" is your escape hatch
 - 5 Whys is mandatory for any proposed workaround
